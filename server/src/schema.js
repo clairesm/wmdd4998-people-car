@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express';
-import { find } from 'lodash';
+import { find, remove } from 'lodash';
 
 const peopleArray = [
   {
@@ -147,6 +147,8 @@ const typeDefs = gql`
       price: String
       personId: String
     ): Car
+
+    removePerson(id: String!): Person
   }
 `;
 
@@ -214,6 +216,20 @@ const resolvers = {
       car.personId = args.personId;
 
       return car;
+    },
+
+    removePerson: (root, args) => {
+      const removedPerson = find(peopleArray, {
+        id: args.id,
+      });
+      if (!removedPerson)
+        throw new Error(
+          `Couldn't find a person with ID ${args.id}`
+        );
+      remove(peopleArray, (p) => {
+        return p.id === removedPerson.id;
+      });
+      return removedPerson;
     },
   },
 };
