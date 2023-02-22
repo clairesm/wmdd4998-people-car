@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Typography } from 'antd';
 import { useMutation } from '@apollo/client';
-import { ADD_PERSON } from '../../queries';
+import { ADD_PERSON, GET_PEOPLE } from '../../queries';
 
 const { Title } = Typography;
 
@@ -26,6 +26,16 @@ const AddPerson = () => {
         id,
         firstName,
         lastName,
+      },
+      update: (cache, { data: { addPerson } }) => {
+        const data = cache.readQuery({ query: GET_PEOPLE });
+        cache.writeQuery({
+          query: GET_PEOPLE,
+          data: {
+            ...data,
+            people: [...data.people, addPerson],
+          },
+        });
       },
     });
   };
