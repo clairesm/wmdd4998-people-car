@@ -196,7 +196,7 @@ const resolvers = {
     updatePerson: (root, args) => {
       const person = find(peopleArray, { id: args.id });
       if (!person)
-        throw new Error()(
+        throw new Error(
           `Couldn't find a person with ID ${args.id}`
         );
       person.firstName = args.firstName;
@@ -208,7 +208,7 @@ const resolvers = {
     updateCar: (root, args) => {
       const car = find(carsArray, { id: args.id });
       if (!car)
-        throw new Error()(
+        throw new Error(
           `Couldn't find a car with ID ${args.id}`
         );
       car.year = args.year;
