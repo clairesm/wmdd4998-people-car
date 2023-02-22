@@ -116,6 +116,14 @@ const typeDefs = gql`
     car(id: String!): Car
     cars: [Car]
   }
+
+  type Mutation {
+    addPerson(
+      id: String!
+      firstName: String!
+      lastName: String!
+    ): Person
+  }
 `;
 
 const resolvers = {
@@ -127,6 +135,19 @@ const resolvers = {
     },
     car: (root, args) => {
       return find(carsArray, { id: args.id });
+    },
+  },
+  Mutation: {
+    addPerson: (root, args) => {
+      const newPerson = {
+        id: args.id,
+        firstName: args.firstName,
+        lastName: args.lastName,
+      };
+
+      peopleArray.push(newPerson);
+
+      return newPerson;
     },
   },
 };
