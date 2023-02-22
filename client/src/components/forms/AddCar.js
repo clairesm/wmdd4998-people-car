@@ -1,13 +1,16 @@
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { Button, Form, Input, Select } from 'antd';
 import { Typography } from 'antd';
+import { useMutation } from '@apollo/client';
+import { ADD_CAR, GET_CARS } from '../../queries';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const AddCar = () => {
-  //   const [id, setId] = useState(uuidv4());
+  const [id, setId] = useState(uuidv4());
+  const [addCar] = useMutation(ADD_CAR);
 
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
@@ -17,7 +20,28 @@ const AddCar = () => {
   }, []);
 
   const onFinish = (values) => {
-    console.log('values', values);
+    const { year, make, model, price, personId } = values;
+
+    addCar({
+      variables: {
+        id,
+        year,
+        make,
+        model,
+        price,
+        personId,
+      },
+      update: (cache, { data: { addCar } }) => {
+        const data = cache.readQuery({ query: GET_CARS });
+        cache.writeQuery({
+          query: GET_CARS,
+          data: {
+            ...data,
+            cars: [...data.cars, addCar],
+          },
+        });
+      },
+    });
   };
 
   return (
@@ -41,7 +65,7 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Make'></Input>
+          <Input placeholder='Year'></Input>
         </Form.Item>
         <Form.Item
           label='Make'
@@ -53,7 +77,7 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Last Name'></Input>
+          <Input placeholder='Make'></Input>
         </Form.Item>
         <Form.Item
           label='Model'
@@ -80,14 +104,14 @@ const AddCar = () => {
           <Input placeholder='Price'></Input>
         </Form.Item>
         <Form.Item
-          name='select-person'
+          name='personId'
           label='Person'
           rules={[{ required: true }]}
         >
           <Select placeholder='Select a person'>
-            <Option value='person-1'>Person 1</Option>
-            <Option value='person-2'>Person 2</Option>
-            <Option value='person-3'>Person 3</Option>
+            <Option value='1'>1</Option>
+            <Option value='2'>2</Option>
+            <Option value='3'>3</Option>
           </Select>
         </Form.Item>
         <Form.Item shouldUpdate={true}>
@@ -103,7 +127,7 @@ const AddCar = () => {
                   .length
               }
             >
-              Add Person
+              Add Car
             </Button>
           )}
         </Form.Item>
