@@ -138,6 +138,15 @@ const typeDefs = gql`
       firstName: String
       lastName: String
     ): Person
+
+    updateCar(
+      id: String!
+      year: String
+      make: String
+      model: String
+      price: String
+      personId: String
+    ): Car
   }
 `;
 
@@ -190,6 +199,21 @@ const resolvers = {
       person.lastName = args.lastName;
 
       return person;
+    },
+
+    updateCar: (root, args) => {
+      const car = find(carsArray, { id: args.id });
+      if (!car)
+        throw new Error()(
+          `Couldn't find a car with ID ${args.id}`
+        );
+      car.year = args.year;
+      car.make = args.make;
+      car.model = args.model;
+      car.price = args.price;
+      car.personId = args.personId;
+
+      return car;
     },
   },
 };
