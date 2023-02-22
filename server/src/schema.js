@@ -123,6 +123,7 @@ const typeDefs = gql`
       firstName: String!
       lastName: String!
     ): Person
+
     addCar(
       id: String!
       year: String!
@@ -131,6 +132,12 @@ const typeDefs = gql`
       price: String!
       personId: String!
     ): Car
+
+    updatePerson(
+      id: String!
+      firstName: String
+      lastName: String
+    ): Person
   }
 `;
 
@@ -157,6 +164,7 @@ const resolvers = {
 
       return newPerson;
     },
+
     addCar: (root, args) => {
       const newCar = {
         id: args.id,
@@ -170,6 +178,18 @@ const resolvers = {
       carsArray.push(newCar);
 
       return newCar;
+    },
+
+    updatePerson: (root, args) => {
+      const person = find(peopleArray, { id: args.id });
+      if (!person)
+        throw new Error()(
+          `Couldn't find a person with ID ${args.id}`
+        );
+      person.firstName = args.firstName;
+      person.lastName = args.lastName;
+
+      return person;
     },
   },
 };
