@@ -28,12 +28,13 @@ const PersonCard = (props) => {
         ]}
       >
         <Cars />
-        {editMode ? (
+        <Card style={{ marginTop: 16 }}>
+          <Link onClick={handleButtonClick}>
+            Learn More
+          </Link>
+        </Card>
+        {editMode && (
           <UpdatePerson onButtonClick={handleButtonClick} />
-        ) : (
-          <Card style={{ marginTop: 16 }}>
-            <Link>Learn More</Link>
-          </Card>
         )}
       </Card>
     </div>
