@@ -123,6 +123,14 @@ const typeDefs = gql`
       firstName: String!
       lastName: String!
     ): Person
+    addCar(
+      id: String!
+      year: String!
+      make: String!
+      model: String!
+      price: String!
+      personId: String!
+    ): Car
   }
 `;
 
@@ -148,6 +156,20 @@ const resolvers = {
       peopleArray.push(newPerson);
 
       return newPerson;
+    },
+    addCar: (root, args) => {
+      const newCar = {
+        id: args.id,
+        year: args.year,
+        make: args.make,
+        model: args.model,
+        price: args.price,
+        personId: args.personId,
+      };
+
+      carsArray.push(newCar);
+
+      return newCar;
     },
   },
 };
