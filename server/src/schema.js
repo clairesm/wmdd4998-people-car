@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-express';
+import { find } from 'lodash';
 
 const peopleArray = [
   {
@@ -110,7 +111,9 @@ const typeDefs = gql`
   }
 
   type Query {
+    person(id: String!): Person
     people: [Person]
+    car(id: String!): Car
     cars: [Car]
   }
 `;
@@ -119,6 +122,12 @@ const resolvers = {
   Query: {
     people: () => peopleArray,
     cars: () => carsArray,
+    person: (root, args) => {
+      return find(peopleArray, { id: args.id });
+    },
+    car: (root, args) => {
+      return find(carsArray, { id: args.id });
+    },
   },
 };
 
