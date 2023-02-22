@@ -1,7 +1,7 @@
 import { Card } from 'antd';
 
 const CarCard = (props) => {
-  console.log('props', props);
+  const { id, year, make, model, price, personId } = props;
   return (
     <div>
       <Card
@@ -9,7 +9,7 @@ const CarCard = (props) => {
         type='inner'
         title='Inner Card title'
       >
-        Inner Card content
+        {year} {make} {model} → {price}
       </Card>
     </div>
   );
