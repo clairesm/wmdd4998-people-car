@@ -26,6 +26,7 @@ const People = () => {
         <List.Item key={id}>
           <PersonCard
             key={id}
+            id={id}
             firstName={firstName}
             lastName={lastName}
           />

@@ -24,7 +24,7 @@ const PersonCard = (props) => {
             key='edit'
             onClick={handleButtonClick}
           />,
-          <RemovePerson />,
+          <RemovePerson id={id} />,
         ]}
       >
         <Cars />
