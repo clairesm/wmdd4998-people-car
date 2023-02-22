@@ -19,6 +19,7 @@ const AddPerson = () => {
     <>
       <Title level={3}>Add Person</Title>
       <Form
+        form={form}
         name='add-person-form'
         layout='inline'
         size='medium'
@@ -56,7 +57,7 @@ const AddPerson = () => {
               disabled={
                 !form.isFieldsTouched(true) ||
                 form
-                  .getFieldError()
+                  .getFieldsError()
                   .filter(({ errors }) => errors.length)
                   .length
               }
