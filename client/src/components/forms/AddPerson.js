@@ -1,12 +1,15 @@
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Typography } from 'antd';
+import { useMutation } from '@apollo/client';
+import { ADD_PERSON } from '../../queries';
 
 const { Title } = Typography;
 
 const AddPerson = () => {
-  //   const [id, setId] = useState(uuidv4());
+  const [id, setId] = useState(uuidv4());
+  const [addPerson] = useMutation(ADD_PERSON);
 
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
@@ -16,7 +19,15 @@ const AddPerson = () => {
   }, []);
 
   const onFinish = (values) => {
-    console.log('values', values);
+    const { firstName, lastName } = values;
+
+    addPerson({
+      variables: {
+        id,
+        firstName,
+        lastName,
+      },
+    });
   };
 
   return (
