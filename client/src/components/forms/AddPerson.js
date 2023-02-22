@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Typography } from 'antd';
@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 const { Title } = Typography;
 
 const AddPerson = () => {
-  const [id, setId] = useState(uuidv4());
+  //   const [id, setId] = useState(uuidv4());
 
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
@@ -15,6 +15,10 @@ const AddPerson = () => {
     forceUpdate([]);
   }, []);
 
+  const onFinish = (values) => {
+    console.log('values', values);
+  };
+
   return (
     <>
       <Title level={3}>Add Person</Title>
@@ -22,6 +26,7 @@ const AddPerson = () => {
         form={form}
         name='add-person-form'
         layout='inline'
+        onFinish={onFinish}
         size='medium'
         style={{ marginBottom: '40px' }}
       >

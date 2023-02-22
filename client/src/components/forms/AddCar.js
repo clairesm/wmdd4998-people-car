@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { Button, Form, Input, Select } from 'antd';
 import { Typography } from 'antd';
@@ -7,7 +7,7 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const AddCar = () => {
-  const [id, setId] = useState(uuidv4());
+  //   const [id, setId] = useState(uuidv4());
 
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
@@ -16,6 +16,10 @@ const AddCar = () => {
     forceUpdate([]);
   }, []);
 
+  const onFinish = (values) => {
+    console.log('values', values);
+  };
+
   return (
     <>
       <Title level={3}>Add Car</Title>
@@ -23,6 +27,7 @@ const AddCar = () => {
         form={form}
         name='add-car-form'
         layout='inline'
+        onFinish={onFinish}
         size='medium'
         style={{ marginBottom: '40px' }}
       >
