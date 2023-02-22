@@ -100,6 +100,7 @@ const UpdateCar = (props) => {
           </Button>
         )}
       </Form.Item>
+      <Button onClick={props.onButtonClick}>Cancel</Button>
     </Form>
   );
 };
