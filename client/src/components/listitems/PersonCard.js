@@ -3,10 +3,12 @@ import Link from 'antd/es/typography/Link';
 import Cars from '../lists/Cars';
 
 const PersonCard = (props) => {
-  console.log('props', props);
+  const { id, firstName, lastName } = props;
+
+  // const name = { firstName, lastName };
   return (
     <div>
-      <Card title='Card title'>
+      <Card title={[firstName, lastName]}>
         <Cars />
         <Card style={{ marginTop: 16 }}>
           <Link>Learn More</Link>
