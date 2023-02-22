@@ -149,6 +149,8 @@ const typeDefs = gql`
     ): Car
 
     removePerson(id: String!): Person
+
+    removeCar(id: String!): Car
   }
 `;
 
@@ -230,6 +232,20 @@ const resolvers = {
         return p.id === removedPerson.id;
       });
       return removedPerson;
+    },
+
+    removeCar: (root, args) => {
+      const removedCar = find(carsArray, {
+        id: args.id,
+      });
+      if (!removedCar)
+        throw new Error(
+          `Couldn't find a car with ID ${args.id}`
+        );
+      remove(carsArray, (p) => {
+        return p.id === removedCar.id;
+      });
+      return removedCar;
     },
   },
 };
