@@ -19,7 +19,14 @@ import {
 const { Title } = Typography;
 const { Option } = Select;
 
+const getStyles = () => ({
+  formItem: {
+    flex: '0 1 auto',
+  },
+});
+
 const AddCar = () => {
+  const styles = getStyles();
   const [id, setId] = useState(uuidv4());
   const [addCar] = useMutation(ADD_CAR);
 
@@ -59,7 +66,7 @@ const AddCar = () => {
   };
 
   return (
-    <>
+    <div>
       <Divider>
         <Title level={4}>Add Car</Title>
       </Divider>
@@ -71,9 +78,11 @@ const AddCar = () => {
         size='medium'
         style={{
           marginBottom: '40px',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(6, auto)',
-          alignItems: 'end',
+          display: 'flex',
+          gap: '10px',
+          justifyContent: 'space-around',
+          flexWrap: 'nowrap',
+          alignItems: 'flex-end',
         }}
       >
         <Form.Item
@@ -85,6 +94,7 @@ const AddCar = () => {
               message: `Please input a year!`,
             },
           ]}
+          style={styles.formItem}
         >
           <Input placeholder='Year' />
         </Form.Item>
@@ -97,6 +107,7 @@ const AddCar = () => {
               message: `Please input a car make!`,
             },
           ]}
+          style={styles.formItem}
         >
           <Input placeholder='Make' />
         </Form.Item>
@@ -109,6 +120,7 @@ const AddCar = () => {
               message: `Please input a car model!`,
             },
           ]}
+          style={styles.formItem}
         >
           <Input placeholder='Model' />
         </Form.Item>
@@ -121,6 +133,7 @@ const AddCar = () => {
               message: `Please input the car's price!`,
             },
           ]}
+          style={styles.formItem}
         >
           <Input
             placeholder='Price'
@@ -131,6 +144,7 @@ const AddCar = () => {
           name='personId'
           label='Person'
           rules={[{ required: true }]}
+          style={styles.formItem}
         >
           <Select placeholder='Select a person...'>
             {loading ? (
@@ -162,13 +176,14 @@ const AddCar = () => {
                   .filter(({ errors }) => errors.length)
                   .length
               }
+              style={styles.formItem}
             >
               Add Car
             </Button>
           )}
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 

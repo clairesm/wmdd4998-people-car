@@ -7,7 +7,14 @@ import { ADD_PERSON, GET_PEOPLE } from '../../queries';
 
 const { Title } = Typography;
 
+const getStyles = () => ({
+  formItem: {
+    flex: '0 1 auto',
+  },
+});
+
 const AddPerson = () => {
+  const styles = getStyles();
   const [id, setId] = useState(uuidv4());
   const [addPerson] = useMutation(ADD_PERSON);
 
@@ -56,11 +63,9 @@ const AddPerson = () => {
         size='medium'
         style={{
           marginBottom: '40px',
-
-          // display: 'grid',
-          // gridTemplateColumns: 'repeat(3, auto)',
-          // alignItems: 'end',
           justifyContent: 'space-evenly',
+          flexWrap: 'nowrap',
+          alignItems: 'flex-end',
         }}
       >
         <Form.Item
@@ -72,6 +77,7 @@ const AddPerson = () => {
               message: `Please input a first name!`,
             },
           ]}
+          style={styles.formItem}
         >
           <Input placeholder='First Name'></Input>
         </Form.Item>
@@ -84,6 +90,7 @@ const AddPerson = () => {
               message: `Please input a last name!`,
             },
           ]}
+          style={styles.formItem}
         >
           <Input
             placeholder='Last Name'
@@ -102,6 +109,7 @@ const AddPerson = () => {
                   .filter(({ errors }) => errors.length)
                   .length
               }
+              style={styles.formItem}
             >
               Add Person
             </Button>
