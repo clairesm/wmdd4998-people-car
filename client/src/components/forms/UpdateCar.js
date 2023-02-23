@@ -1,14 +1,15 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Button, Input, Select, Form } from 'antd';
-// import Form from 'antd/es/form/Form';
 import { useEffect, useState } from 'react';
-import { UPDATE_CAR } from '../../queries';
+import { UPDATE_CAR, GET_PEOPLE } from '../../queries';
 
 const { Option } = Select;
 
 const UpdateCar = (props) => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
+
+  const { loading, error, data } = useQuery(GET_PEOPLE);
 
   const [id] = useState(props.id);
   const [year, setYear] = useState(props.year);
@@ -60,6 +61,9 @@ const UpdateCar = (props) => {
         break;
     }
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <Form
@@ -143,21 +147,33 @@ const UpdateCar = (props) => {
           }
         />
       </Form.Item>
-
       <Form.Item
         name='personId'
         label='Person'
-        rules={[{ required: true }]}
+        rules={[{ required: false }]}
       >
         <Select
           placeholder='Select a person'
-          onChange={(e) =>
-            updateStateVariable('personId', e.target.value)
+          onChange={(value) =>
+            updateStateVariable('personId', value)
           }
+          value={personId}
         >
-          <Option value='1'>1</Option>
-          <Option value='2'>2</Option>
-          <Option value='3'>3</Option>
+          {loading ? (
+            <Option value='' disabled>
+              Loading...
+            </Option>
+          ) : error ? (
+            <Option value='' disabled>
+              Error loading data
+            </Option>
+          ) : (
+            data.people.map((person) => (
+              <Option key={person.id} value={person.id}>
+                {`${person.firstName} ${person.lastName}`}
+              </Option>
+            ))
+          )}
         </Select>
       </Form.Item>
 
