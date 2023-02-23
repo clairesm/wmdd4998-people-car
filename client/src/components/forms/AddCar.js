@@ -122,7 +122,10 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Price' defaultValue='$' />
+          <Input
+            placeholder='Price'
+            // defaultValue='$'
+          />
         </Form.Item>
         <Form.Item
           name='personId'

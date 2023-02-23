@@ -1,5 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { Button, Input, Select, Form } from 'antd';
+import {
+  Button,
+  Input,
+  Select,
+  Form,
+  InputNumber,
+} from 'antd';
 import { useEffect, useState } from 'react';
 import { UPDATE_CAR, GET_PEOPLE } from '../../queries';
 
@@ -142,7 +148,6 @@ const UpdateCar = (props) => {
       >
         <Input
           placeholder='Price'
-          defaultValue='$'
           onChange={(e) =>
             updateStateVariable('price', e.target.value)
           }

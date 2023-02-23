@@ -5,7 +5,7 @@ import { EditOutlined } from '@ant-design/icons';
 import RemovePerson from '../buttons/RemovePerson';
 import { useState } from 'react';
 import UpdatePerson from '../forms/UpdatePerson';
-import LearnMore from '../screens/LearnMore';
+// import LearnMore from '../screens/LearnMore';
 
 const PersonCard = (props) => {
   const [id] = useState(props.id);
