@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Divider, Form, Input } from 'antd';
 import { Typography } from 'antd';
 import { useMutation } from '@apollo/client';
 import { ADD_PERSON, GET_PEOPLE } from '../../queries';
@@ -43,14 +43,25 @@ const AddPerson = () => {
 
   return (
     <>
-      <Title level={3}>Add Person</Title>
+      <Divider>
+        <Title level={4} style={{ textAlign: 'center' }}>
+          Add Person
+        </Title>
+      </Divider>
       <Form
         form={form}
         name='add-person-form'
         layout='inline'
         onFinish={onFinish}
         size='medium'
-        style={{ marginBottom: '40px' }}
+        style={{
+          marginBottom: '40px',
+
+          // display: 'grid',
+          // gridTemplateColumns: 'repeat(3, auto)',
+          // alignItems: 'end',
+          justifyContent: 'space-evenly',
+        }}
       >
         <Form.Item
           label='First Name'
@@ -74,7 +85,10 @@ const AddPerson = () => {
             },
           ]}
         >
-          <Input placeholder='Last Name'></Input>
+          <Input
+            placeholder='Last Name'
+            style={{ minWidth: '50%' }}
+          ></Input>
         </Form.Item>
         <Form.Item shouldUpdate={true}>
           {() => (

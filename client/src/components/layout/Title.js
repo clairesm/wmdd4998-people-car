@@ -1,14 +1,22 @@
+import { Divider } from 'antd';
+
 const getStyles = () => ({
   title: {
     fontSize: 20,
     padding: '15px',
-    marginBottom: '50px',
+    marginBottom: '20px',
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 const Title = () => {
   const styles = getStyles();
-  return <h1 style={styles.title}>POPLE AND THEIR CARS</h1>;
+  return (
+    <>
+      <h1 style={styles.title}>PEOPLE AND THEIR CARS</h1>
+      <Divider />
+    </>
+  );
 };
 
 export default Title;

@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import Cars from '../lists/Cars';
 import { EditOutlined } from '@ant-design/icons';
@@ -59,7 +59,7 @@ const PersonCard = (props) => {
             firstName={props.firstName}
             lastName={props.lastName}
             onButtonClick={handleButtonClick}
-            updateStateVariable={updateStateVariable}
+            updateStateVaritable={updateStateVariable}
           />
         )}
       </Card>

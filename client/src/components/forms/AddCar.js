@@ -1,6 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
-import { Button, Form, Input, Select } from 'antd';
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  Select,
+  Space,
+} from 'antd';
 import { Typography } from 'antd';
 import { useMutation, useQuery } from '@apollo/client';
 import {
@@ -53,14 +60,21 @@ const AddCar = () => {
 
   return (
     <>
-      <Title level={3}>Add Car</Title>
+      <Divider>
+        <Title level={4}>Add Car</Title>
+      </Divider>
       <Form
         form={form}
         name='add-car-form'
         layout='inline'
         onFinish={onFinish}
         size='medium'
-        style={{ marginBottom: '40px' }}
+        style={{
+          marginBottom: '40px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, auto)',
+          alignItems: 'end',
+        }}
       >
         <Form.Item
           label='Year'
