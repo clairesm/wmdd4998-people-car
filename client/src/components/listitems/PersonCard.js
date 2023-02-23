@@ -7,12 +7,28 @@ import { useState } from 'react';
 import UpdatePerson from '../forms/UpdatePerson';
 
 const PersonCard = (props) => {
-  const { id, firstName, lastName } = props;
-
+  const [id] = useState(props.id);
+  const [firstName, setFirstName] = useState(
+    props.firstName
+  );
+  const [lastName, setLastName] = useState(props.lastName);
   const [editMode, setEditMode] = useState(false);
 
   const handleButtonClick = () => {
     setEditMode(!editMode);
+  };
+
+  const updateStateVariable = (variable, value) => {
+    switch (variable) {
+      case 'firstName':
+        setFirstName(value);
+        break;
+      case 'lastName':
+        setLastName(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -34,7 +50,13 @@ const PersonCard = (props) => {
           </Link>
         </Card>
         {editMode && (
-          <UpdatePerson onButtonClick={handleButtonClick} />
+          <UpdatePerson
+            id={props.id}
+            firstName={props.firstName}
+            lastName={props.lastName}
+            onButtonClick={handleButtonClick}
+            updateStateVariable={updateStateVariable}
+          />
         )}
       </Card>
     </div>

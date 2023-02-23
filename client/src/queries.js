@@ -90,3 +90,21 @@ export const REMOVE_CAR = gql`
     }
   }
 `;
+
+export const UPDATE_PERSON = gql`
+  mutation UpdatePerson(
+    $id: String!
+    $firstName: String!
+    $lastName: String!
+  ) {
+    updatePerson(
+      id: $id
+      firstName: $firstName
+      lastName: $lastName
+    ) {
+      id
+      firstName
+      lastName
+    }
+  }
+`;

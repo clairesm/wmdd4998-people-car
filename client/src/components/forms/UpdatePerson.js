@@ -1,15 +1,50 @@
+import { useMutation } from '@apollo/client';
 import { Button, Input } from 'antd';
 import Form from 'antd/es/form/Form';
 import Title from 'antd/es/typography/Title';
 import { useEffect, useState } from 'react';
+import { UPDATE_PERSON } from '../../queries';
 
 const UpdatePerson = (props) => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
+  const [id] = useState(props.id);
+  const [firstName, setFirstName] = useState(
+    props.firstName
+  );
+  const [lastName, setLastName] = useState(props.lastName);
+
+  const [updatePerson] = useMutation(UPDATE_PERSON);
 
   useEffect(() => {
     forceUpdate();
   }, []);
+
+  const onFinish = (values) => {
+    const { firstName, lastName } = values;
+    updatePerson({
+      variables: {
+        id,
+        firstName,
+        lastName,
+      },
+    });
+    props.onButtonClick();
+  };
+
+  const updateStateVariable = (variable, value) => {
+    props.updateStateVariable(variable, value);
+    switch (variable) {
+      case 'firstName':
+        setFirstName(value);
+        break;
+      case 'lastName':
+        setLastName(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div style={{ marginTop: 16 }}>
@@ -18,7 +53,12 @@ const UpdatePerson = (props) => {
         form={form}
         name='update-person-form'
         layout='inline'
+        onFinish={onFinish}
         size='medium'
+        initialValues={{
+          firstName: firstName,
+          lastName: lastName,
+        }}
       >
         <Form.Item
           name='firstName'
@@ -29,7 +69,15 @@ const UpdatePerson = (props) => {
             },
           ]}
         >
-          <Input placeholder='i.e. John' />
+          <Input
+            placeholder='i.e. John'
+            onChange={(e) =>
+              updateStateVariable(
+                'firstName',
+                e.target.value
+              )
+            }
+          />
         </Form.Item>
         <Form.Item
           name='lastName'
@@ -40,7 +88,15 @@ const UpdatePerson = (props) => {
             },
           ]}
         >
-          <Input placeholder='i.e. Smith' />
+          <Input
+            placeholder='i.e. Smith'
+            onChange={(e) =>
+              updateStateVariable(
+                'lastName',
+                e.target.value
+              )
+            }
+          />
         </Form.Item>
         <Form.Item shouldUpdate={true}>
           {() => (
