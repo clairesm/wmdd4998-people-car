@@ -8,6 +8,7 @@ import { ADD_CAR, GET_CARS } from '../../queries';
 const { Title } = Typography;
 const { Option } = Select;
 
+//****ORIGINAAL */
 const AddCar = () => {
   const [id, setId] = useState(uuidv4());
   const [addCar] = useMutation(ADD_CAR);
@@ -42,6 +43,7 @@ const AddCar = () => {
         });
       },
     });
+    form.resetFields();
   };
 
   return (
@@ -135,5 +137,6 @@ const AddCar = () => {
     </>
   );
 };
+//**** end of ORIGINAAL */
 
 export default AddCar;

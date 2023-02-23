@@ -43,7 +43,7 @@ const PersonCard = (props) => {
           <RemovePerson id={id} />,
         ]}
       >
-        <Cars />
+        <Cars id={id} />
         <Card style={{ marginTop: 16 }}>
           <Link onClick={handleButtonClick}>
             Learn More
