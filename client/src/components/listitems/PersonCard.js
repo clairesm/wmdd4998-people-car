@@ -59,7 +59,7 @@ const PersonCard = (props) => {
             firstName={props.firstName}
             lastName={props.lastName}
             onButtonClick={handleButtonClick}
-            updateStateVaritable={updateStateVariable}
+            updateStateVariable={updateStateVariable}
           />
         )}
       </Card>
