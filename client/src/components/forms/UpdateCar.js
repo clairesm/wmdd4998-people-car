@@ -142,6 +142,7 @@ const UpdateCar = (props) => {
       >
         <Input
           placeholder='Price'
+          defaultValue='$'
           onChange={(e) =>
             updateStateVariable('price', e.target.value)
           }
