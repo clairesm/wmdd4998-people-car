@@ -1,10 +1,11 @@
 import { Card } from 'antd';
-import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
 import Cars from '../lists/Cars';
 import { EditOutlined } from '@ant-design/icons';
 import RemovePerson from '../buttons/RemovePerson';
 import { useState } from 'react';
 import UpdatePerson from '../forms/UpdatePerson';
+import LearnMore from '../screens/LearnMore';
 
 const PersonCard = (props) => {
   const [id] = useState(props.id);
@@ -45,7 +46,10 @@ const PersonCard = (props) => {
       >
         <Cars id={id} />
         <Card style={{ marginTop: 16 }}>
-          <Link onClick={handleButtonClick}>
+          <Link
+            to={`/LearnMore/${id}`}
+            id={`learn-more-${id}`}
+          >
             Learn More
           </Link>
         </Card>

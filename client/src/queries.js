@@ -135,3 +135,13 @@ export const UPDATE_CAR = gql`
     }
   }
 `;
+
+export const GET_PERSON_BY_ID = gql`
+  query GetPersonById($id: String!) {
+    person(id: $id) {
+      id
+      firstName
+      lastName
+    }
+  }
+`;
