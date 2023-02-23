@@ -70,7 +70,13 @@ const CarCard = (props) => {
           style={{ marginTop: 16 }}
           type='inner'
           title={[
-            year + ' ' + make + ' ' + model + ' → ' + price,
+            year +
+              ' ' +
+              make +
+              ' ' +
+              model +
+              ' → $' +
+              Number(price).toLocaleString(),
           ]}
           actions={[
             <EditOutlined
