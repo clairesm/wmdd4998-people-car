@@ -27,6 +27,7 @@ const Cars = () => {
           <List.Item key={id}>
             <CarCard
               key={id}
+              id={id}
               year={year}
               make={make}
               model={model}

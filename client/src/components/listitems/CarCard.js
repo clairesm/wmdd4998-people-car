@@ -25,7 +25,7 @@ const CarCard = (props) => {
               key='edit'
               onClick={handleButtonClick}
             />,
-            <RemoveCar />,
+            <RemoveCar id={id} />,
           ]}
         >
           <UpdateCar onButtonClick={handleButtonClick} />
@@ -42,7 +42,7 @@ const CarCard = (props) => {
               key='edit'
               onClick={handleButtonClick}
             />,
-            <RemoveCar />,
+            <RemoveCar id={id} />,
           ]}
         >
           {/* {year} {make} {model} → {price} */}
