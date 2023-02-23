@@ -2,16 +2,21 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { Button, Form, Input, Select } from 'antd';
 import { Typography } from 'antd';
-import { useMutation } from '@apollo/client';
-import { ADD_CAR, GET_CARS } from '../../queries';
+import { useMutation, useQuery } from '@apollo/client';
+import {
+  ADD_CAR,
+  GET_CARS,
+  GET_PEOPLE,
+} from '../../queries';
 
 const { Title } = Typography;
 const { Option } = Select;
 
-//****ORIGINAAL */
 const AddCar = () => {
   const [id, setId] = useState(uuidv4());
   const [addCar] = useMutation(ADD_CAR);
+
+  const { loading, error, data } = useQuery(GET_PEOPLE);
 
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
@@ -67,7 +72,7 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Year'></Input>
+          <Input placeholder='Year' />
         </Form.Item>
         <Form.Item
           label='Make'
@@ -79,7 +84,7 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Make'></Input>
+          <Input placeholder='Make' />
         </Form.Item>
         <Form.Item
           label='Model'
@@ -91,7 +96,7 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Model'></Input>
+          <Input placeholder='Model' />
         </Form.Item>
         <Form.Item
           label='Price'
@@ -103,17 +108,29 @@ const AddCar = () => {
             },
           ]}
         >
-          <Input placeholder='Price'></Input>
+          <Input placeholder='Price' />
         </Form.Item>
         <Form.Item
           name='personId'
           label='Person'
           rules={[{ required: true }]}
         >
-          <Select placeholder='Select a person'>
-            <Option value='1'>1</Option>
-            <Option value='2'>2</Option>
-            <Option value='3'>3</Option>
+          <Select placeholder='Select a person...'>
+            {loading ? (
+              <Option value='' disabled>
+                Loading...
+              </Option>
+            ) : error ? (
+              <Option value='' disabled>
+                Error loading data
+              </Option>
+            ) : (
+              data.people.map((person) => (
+                <Option key={person.id} value={person.id}>
+                  {`${person.firstName} ${person.lastName}`}
+                </Option>
+              ))
+            )}
           </Select>
         </Form.Item>
         <Form.Item shouldUpdate={true}>
@@ -137,6 +154,5 @@ const AddCar = () => {
     </>
   );
 };
-//**** end of ORIGINAAL */
 
 export default AddCar;
