@@ -40,7 +40,9 @@ const LearnMore = (props) => {
 
   return (
     <div>
-      <Link to='/'> ← HOME</Link>
+      <div style={{ marginBottom: '20px' }}>
+        <Link to='/'>← GO BACK HOME</Link>
+      </div>
       <Card
         title={[person.firstName + ' ' + person.lastName]}
       >
